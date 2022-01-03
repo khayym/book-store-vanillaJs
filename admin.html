@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Links -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+		<link rel="stylesheet" href="./assets/css/font.css" />
+		<link rel="stylesheet" href="./assets/css/style.css" />
+		<link rel="stylesheet" href="./assets/css/responsive.css" />
+
+		<title>Admin Panel</title>
+	</head>
+    <title>Admin Panel</title>
+  </head>
+
+<body>
+
+    <!-- Admin Login  -->
+    <div class="adminPanelLogin" style="height:1575px">
+        <div class="container-fluid" id="zzzz">
+            <div class="row">
+                <div class="col-md-12 mt-4 pt-5" style="display: flex">
+                    <img src="./assets/img/logoAdmin.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="container d-flex" id="logInContainer">
+            <div class="col-lg-12 d-flex align-item-center justify-content-center mb-5">
+                <form id="formLogin" method="post" class="mx-auto p-5 bg-white mb-5">
+                    <h1 class="d-flex justify-content-center ">Welcome Admin</h1>
+                    <div>
+                        <input id="adminName" type="text" placeholder="Username" class="p-4" />
+                        <span id="errorName" class="error d-none">Your name is not correct</span>
+                    </div>
+                    <div>
+                        <input id="adminPassword" type="password" placeholder="Password" class="p-4 mt-4" required />
+                        <span id="errorPassword" class="error d-none">Your password is not correct</span>
+                    </div>
+                    <button onkeypress="clickPress()" id="singInAdminPanelBtn" class="p-4 mt-5">
+							Join
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Admin Login -->
+	
+		<div class="container-fluid" id="main-dasboard">
+			<div class="row" id="mainAdminPage">
+				<!-- Side Navigation Bar Start -->
+				<div class="col-lg-3 col-md-4 d-flex flex-column" id="side-nav">
+					<div class="jumbotron bg-transparent" style="position: fixed">
+						<div class="d-flex justify-content-around logo-section">
+							<img
+								src="./assets/img/newWhiteLogo.svg"
+								id="logo-img"
+								class="img-thumbnail bg-transparent"
+								alt=""
+							/>
+							<img src="./assets/img/x.svg" class="x-logo img-thumbnail bg-transparent" alt="" />
+						</div>
+						<div class="mt-5" id="nav-items-section">
+							<div class="mt-4" id="nav-items">
+								<i class="fa fa-home text-white side-icon fa-2x" aria-hidden="true"></i>
+								<a class='ml-2' href="./home.html">Home</a>
+							</div>
+							<div class="mt-4 lala" id="nav-items">
+								<i class="fa fa-info-circle text-white side-icon fa-2x" aria-hidden="true"></i>
+								<a class='ml-2' href="./aboutus.html">About</a>
+							</div>
+							<div class="mt-4" id="nav-items">
+								<i class="fa fa-sign-in text-white side-icon fa-2x" aria-hidden="true"></i>
+								<a class='ml-2' href="#">Join Us</a>
+							</div>
+							<div class="mt-4" id="nav-items">
+								<i class="fas fa-headset text-white side-icon fa-2x"></i>
+								<a class='ml-2' href="./contact.html">Contact</a>
+							</div>
+							<div class="mt-4 logOutBtn" id="nav-items">
+								<i class="fa fa-sign-out fa-2x text-white" aria-hidden="true"></i>
+								<a class='ml-2' href="#">Logout</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Side Navigation Bar End -->
+
+				<!-- Main Admin Section start-->
+				<div class="col-lg-9 col-md-8 mt-lg-3" id="admin-section">
+					<div class="mx-lg-5">
+						<div class="d-flex justify-content-end mt-md-4 mt-lg-5" id="admin-sec-header">
+							<div class="d-flex flex-row align-items-center ml-5" id="admin-sec-icon-pls">
+								<img src="./assets/img/adminIcon.svg" alt="" class="mr-2" />
+								<h6 class="h6 mt-2">Admin</h6>
+							</div>
+						</div>
+						<!-- -------- -->
+						<div
+							class="d-flex align-items-center justify-content-between mx-3"
+							id="admin-sec-header-2"
+						>
+							<div class="d-flex">
+								<img id="sm-img-header" src="./assets/img/redlogo.svg" alt="" style="width: 60px" />
+								<div class="d-flex flex-column ml-2 mt-3">
+									<a class="logo-sec-title-2" href="#">LIBRARY</a>
+									<div class="mt" id="line-between-2"></div>
+									<p
+										class="mt-1 text-dark font-weight-light"
+										id="aaa"
+										style="font-size: 13px; font-weight: 400"
+									>
+										Admin Panel
+									</p>
+								</div>
+							</div>
+							<div class="col-2">
+								<i class="fa fa-bars fa-2x" aria-hidden="true" id="toggleBtn"></i>
+							</div>
+						</div>
+						<!-- --------- -->
+						<div class="mt-5" id="admin-main-section">
+							<h2 class="" id="title">Add book</h2>
+							<!-- Search box start -->
+							<div class="a" id="search-book">
+								<h5 class="mt-5" style="font-weight: 600">Search book</h5>
+								<div
+									class="
+										input-group
+										d-flex
+										flex-row
+										justify-content-between
+										align-items-center
+										bg-white
+										"
+										id="searching-sec"
+										>
+										<i class="fa fa-search ml-4" aria-hidden="true"></i>
+										<input
+										type="search"
+									id="searching-input"
+									class="mx-3 form-control"
+									style="width: 50%"
+										aria-describedby="basic-addon2"
+										placeholder="Dan Brown"
+										/>
+									</div>
+									<div class="mt-2 d-none" id="searching-results-contanier">
+										<div class="d-flex flex-column ml-5" id="searching-results" style="height: 85px; padding-top: 11px">
+											<lottie-player id='anime' class='mx-2' src="https://assets9.lottiefiles.com/packages/lf20_ynlkstie.json"  background="transparent"  speed="1.5"  style="width: 50px; height: 50px;"  loop  autoplay></lottie-player>
+										 <!-- <span class="row d-flex align-items-center" style="color: #BCBCBC;">
+										<i class="far fa-clock mb-3" aria-hidden="true" ></i>
+										<p class="ml-4">test</p>
+									   </span> -->
+								</div>
+								</div>
+							</div>
+							<!-- Search box end -->
+
+							<!-- Book Form start -->
+							<div class="mt-5 pt-5">
+								<h2 id="book-form-title">Book form</h2>
+								<div class="bg-white mt-4" style="border-radius: 20px" id="book-form-sec">
+									<form class="px-4 py-4">
+										<div class="form-group">
+											<label for="formGroupExampleInput">Book Name</label>
+											<input type="text" class="form-control" data-form-inputs="bookName" />
+										</div>
+										<div class="form-group">
+											<label class="" for="formGroupExampleInput2">Author Name</label>
+											<input type="text" class="form-control" data-form-inputs="authorName" />
+										</div>
+										<div class="form-group">
+											<label for="formGroupExampleInput2">Book Image URL</label>
+											<input type="text " class="form-control" data-form-inputs="bookImageUrl" />
+										</div>
+										<div class="form-group">
+											<label for="formGroupExampleInput2">Published Year</label>
+											<input type="text " class="form-control" data-form-inputs="publicYear" />
+										</div>
+										<div class="form-check">
+											<input
+												class="form-check-input"
+												type="checkbox"
+												value="new"
+												data-form-inputs="checkbox"
+												id="defaultCheck1"
+											/>
+											<label class="form-check-label" for="defaultCheck1"> New </label>
+										</div>
+										<div class="form-group mt-4">
+											<label for="exampleFormControlTextarea1">Description</label>
+											<textarea
+												class="form-control"
+												maxlength="100"
+												data-form-inputs="description"
+												id="exampleFormControlTextarea1"
+												rows="3"
+											></textarea>
+										</div>
+										<div class="form-group mt-4">
+											<div>
+												<div class="dropdown">
+													<label for="exampleFormControlSelect1">Book Type</label>
+													<button
+														class="btn"
+														type="button"
+														id="dropdownMenuButton"
+														data-toggle="dropdown"
+														aria-haspopup="true"
+														aria-expanded="false"
+													>
+														<i
+															class="fa fa-plus text-success"
+															id="dropdown-i"
+															aria-hidden="true"
+														></i>
+													</button>
+													<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														<div class="m-2">
+															<input
+																class="form-control"
+																type="text"
+																name=""
+																id="dropdown-input"
+																placeholder="Add type"
+																style="border-radius: 4px !important"
+															/>
+															<button
+																class="btn btn-block btn-outline-warning mt-2"
+																id="dropdown-btn"
+															>
+																add
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<select
+												class="form-control"
+												data-form-inputs="catagory"
+												id="exampleFormControlSelect1"
+											>
+												<option value="none">Chpize Type</option>
+											</select>
+										</div>
+										<button
+											class="btn btn-block mt-2 text-white"
+											id="btn-book-from"
+											style="border-radius: 10px; height: 40px; font-size: 14px"
+										>
+											Add
+										</button>
+									</form>
+								</div>
+							</div>
+							<!-- Book Form end -->
+
+							<!--About store start -->
+							<div class="mt-5 pt-5" id="about-store">
+								<h2 class="mt-5" id="about-store-title">About store</h2>
+								<div class="bg-white mt-4" style="border-radius: 20px" id="book-form-sec">
+									<form class="px-4 py-4">
+										<div class="form-group">
+											<label for="formGroupExampleInput2">Title</label>
+											<input
+												type="text"
+												class="form-control"
+												id="aboutTitle"
+												data-form-inputs="about-title"
+											/>
+										</div>
+										<div class="form-group">
+											<label for="formGroupExampleInput2">Book Img Url</label>
+											<input type="text" class="form-control" data-form-inputs="about-imgUrl" />
+										</div>
+										<div class="form-group mt-4">
+											<label for="exampleFormControlTextarea2">Description</label>
+											<textarea
+												class="form-control"
+												id="exampleFormControlTextarea2"
+												rows="3"
+											></textarea>
+										</div>
+										<button
+											class="btn btn-block mt-2 text-white"
+											id="btn-about-from"
+											style="border-radius: 10px; height: 40px; font-size: 14px"
+										>
+											About info add
+										</button>
+									</form>
+								</div>
+							</div>
+							<!-- About store end -->
+							<!-- Join Us start -->
+							<div class="mt-5 pt-5 col-lg-6" id="join-us">
+								<h2 class="mt-lg-5" id="join-us-title">Join Us</h2>
+								<table class="table table-striped mt-3" id="join-us-table">
+									<thead class="text-white text-center">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Full Name</th>
+											<th scope="col">Email Adress</th>
+										</tr>
+									</thead>
+									<tbody class="text-center" id="joinUs-tbody">
+										<!-- <tr id='tr-1'>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>xeyyam.kerimov@gmailcom</td>
+                                        </tr> -->
+									</tbody>
+								</table>
+							</div>
+							<!-- Join Us end -->
+
+							<!-- Contack Us start -->
+							<div class="mt-5 pt-5 pb-5 mb-5" id="contact-us">
+								<h2 class="mt-lg-5" id="contact-us-title">Contact Us</h2>
+								<table class="table table-striped mt-3 pb-5 mb-5" id="contact-us-table">
+									<thead class="text-white text-center">
+										<tr>
+											<th class="" scope="col">#</th>
+											<th scope="col" id="join-th-fullname">Full Name</th>
+											<th scope="col" id="join-th-adress">Adress</th>
+											<th scope="col" id="join-th-email">Email Address</th>
+											<th scope="col" id="join-th-phnum">Phone Number</th>
+										</tr>
+									</thead>
+									<tbody class="text-center" id="contact-us-body">
+										<!-- <tr id='tr-1'>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Mark</td>
+                                    <td>Mark</td>
+                                    <td>xeyyam.kerimov@gmailcom</td>
+                                </tr> -->
+									</tbody>
+								</table>
+							</div>
+							<!-- Contact Us end -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.js " integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin=" anonymous "></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js " integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN " crossorigin="anonymous "></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js " integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2 " crossorigin="anonymous "></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js "></script>
+		<script src="./assets/js/toastr.js"></script>
+		<script src="./assets/js/db.js "></script>
+		<script src="./assets/js/admin.js "></script>
+	</body>
+</html>

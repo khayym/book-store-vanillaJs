@@ -1,0 +1,121 @@
+@media (max-width: 768px) {
+	#side-nav {
+		/* left:-30rem !important; */
+		position: absolute;
+		left: -50rem;
+		width: 88%;
+		z-index: 999;
+		transition: all 0.8s;
+		box-shadow: 95px 0px 8px 5px rgba(0, 0, 0, 0.7);
+		-webkit-box-shadow: 95px 0px 8px 5px rgba(0, 0, 0, 0.7);
+		-moz-box-shadow: 95px 0px 8px 5px rgba(0, 0, 0, 0.7);
+	}
+	#admin-section {
+		width: 100% !important;
+	}
+
+	#join-th-adress,
+	#join-th-email,
+	#join-th-phnum {
+		display: none !important;
+	}
+	#contact-us tbody tr td:not(:nth-child(2)) {
+		display: none !important;
+	}
+	#admin-sec-header {
+		display: none !important;
+	}
+
+	#admin-sec-icon-pls img,
+	h6 {
+		display: none !important;
+	}
+
+	#title,
+	#search-book,
+	#book-form-title,
+	#about-store-title,
+	#join-us-title,
+	#contact-us-title {
+		padding-left: 1.5rem !important;
+	}
+
+	#line-between-2 {
+		width: 142px;
+		height: 0.1rem;
+		background-color: #000;
+		border-top: 1px solid #000;
+		opacity: 50%;
+	}
+
+	.logo-sec-title-2 {
+		color: var(--main-Red-bg-color);
+		font-weight: 900;
+	}
+
+	#join-us thead th:last-child {
+		display: none !important;
+	}
+	#join-us tbody tr td:last-child {
+		display: none !important;
+	}
+	#join-us-table,
+	#join-us {
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+		margin-right: 0px !important;
+		margin-left: 0px !important;
+	}
+
+	#searching-sec {
+		width: 90%;
+	}
+
+	#searching-results-contanier {
+		width: 90%;
+	}
+
+	#admin-sec-header-2 {
+		display: flex !important;
+	}
+
+	.x-logo {
+		display: flex !important;
+	}
+	/* body{
+     pointer-events: none !important;
+} */
+}
+
+@media (min-width: 768px) {
+	#side-nav {
+		left: 0rem !important;
+	}
+}
+
+@media screen and (max-width: 300px) {
+	span.psw {
+		display: block;
+		float: none;
+	}
+	.cancelbtn {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	form {
+		right: 400px;
+		margin-top: 100px;
+		max-width: 90%;
+		margin-left: 14px;
+	}
+
+	.btn-orange {
+		display: none !important;
+	}
+
+	.media_btn {
+		display: block !important;
+	}
+}

@@ -1,0 +1,53 @@
+
+/* Contact Us Page Css start */
+#form-control-contactPG{
+	height:75px;
+	border:1px solid #CECECE
+}
+
+#form-control-contactPG::placeholder{
+	font-family: 'Crimson Pro', serif;
+	font-size: 23px;
+	color: #797667;
+}
+
+.btn-contactPG,.btn-contactPG-2{
+	height:75px;
+	background-color:var(--main-Orange-color) !important;
+	font-family: 'Crimson Pro', serif;
+	font-size: 30px;
+}
+.btn-contactPG:hover{
+	transition: all 0.3s;
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+}
+
+.btn-contactPG-2:hover{
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+@media (max-width: 992px) {
+	.btn-contactPG{
+		display: none;
+	}
+	#form-control-contactPG{
+		border-radius:5px !important;
+	}
+	
+	.btn-contactPG-2{
+		display: block !important;
+		border-radius:5px !important;
+		margin-top:69px !important;
+	}
+
+	.inp_div_contact{
+		margin-top:32px !important;
+	}
+
+	#social-icons-contact{
+		margin-top:340px !important;
+	}
+
+}
+/* Contact Us Page Css end */
