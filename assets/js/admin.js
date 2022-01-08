@@ -64,84 +64,187 @@ $('.logOutBtn').on('click', () => {
 	location.reload();
 });
 
-$(document).ready(function () {
-	$('#searching-input').on('keyup', (e) => {
-		e.preventDefault();
-		$('#searching-results-contanier').removeClass('d-none');
-		if (e.target.value.trim().length > 3) {
-			$('lottie-player').addClass('d-none');
-			$('#searching-results').empty();
-			getBookInfo(e.target.value.trim());
-		}else{
-			$('#searching-results-contanier').removeClass('d-none');
-		}
-	});
-});
+// $(document).ready(function () {
+// 	$('#searching-input').on('keyup', (e) => {
+// 		e.preventDefault();
+// 		$('#searching-results-contanier').removeClass('d-none');
+// 		if (e.target.value.trim().length > 3) {
+// 			$('lottie-player').addClass('d-none');
+// 			$('#searching-results').empty();
+// 			getBookInfo(e.target.value.trim());
+// 		}else{
+// 			$('#searching-results-contanier').removeClass('d-none');
+// 		}
+// 	});
+// });
 
-$(document).on('click', '[data-datRes]', (e) => {
-	setBookData(e.target.id);
-});
+// $(document).on('click', '[data-datRes]', (e) => {
+// 	setBookData(e.target.id);
+// });
 
-getBookInfo = (data) => {
-	const settings = {
-		async: true,
-		crossDomain: true,
-		url: `https://goodreads-books.p.rapidapi.com/search?q=${data}&page=1`,
-		method: 'GET',
-		headers: {
-			'x-rapidapi-host': 'goodreads-books.p.rapidapi.com',
-			'x-rapidapi-key': '9d9588302emsh58804fa5a30d4d9p1b947ajsn659ea6ae2269',
-		},
-	};
+// getBookInfo = (data) => {
+// 	const settings = {
+// 		async: true,
+// 		crossDomain: true,
+// 		url: `https://goodreads-books.p.rapidapi.com/search?q=${data}&page=1`,
+// 		method: 'GET',
+// 		headers: {
+// 			'x-rapidapi-host': 'goodreads-books.p.rapidapi.com',
+// 			'x-rapidapi-key': '9d9588302emsh58804fa5a30d4d9p1b947ajsn659ea6ae2269',
+// 		},
+// 	};
 
-	$.ajax(settings).then((res) => {
-		// $('#searching-results-contanier').removeClass('d-none');
-		$('#searching-results').append(
-			res.map((booksInfo) => {
-				console.log(booksInfo);
-				return `
-               <span class='row align-items-center' data-datRes  style='color: #BCBCBC;'>
-                   <i class="far fa-clock mb-3 ml-3" aria-hidden="true"></i>
-                   <p class='ml-4' style="cursor: pointer" id="${booksInfo.title}">${
-					booksInfo.title.length > 30 ? booksInfo.title.slice(0, 30) + '...' : booksInfo.title
-				}</p>
-               </span>
-               `;
+// 	$.ajax(settings).then((res) => {
+// 		// $('#searching-results-contanier').removeClass('d-none');
+// 		$('#searching-results').append(
+// 			res.map((booksInfo) => {
+// 				console.log(booksInfo);
+// 				return `
+//                <span class='row align-items-center' data-datRes  style='color: #BCBCBC;'>
+//                    <i class="far fa-clock mb-3 ml-3" aria-hidden="true"></i>
+//                    <p class='ml-4' style="cursor: pointer" id="${booksInfo.title}">${
+// 					booksInfo.title.length > 30 ? booksInfo.title.slice(0, 30) + '...' : booksInfo.title
+// 				}</p>
+//                </span>
+//                `;
+// 			})
+// 		);
+// 	});
+// };
+
+// setBookData = (data) => {
+// 	const settings = {
+// 		async: true,
+// 		crossDomain: true,
+// 		url: `https://goodreads-books.p.rapidapi.com/search?q=${data}&page=1`,
+// 		method: 'GET',
+// 		headers: {
+// 			'x-rapidapi-host': 'goodreads-books.p.rapidapi.com',
+// 			'x-rapidapi-key': '9d9588302emsh58804fa5a30d4d9p1b947ajsn659ea6ae2269',
+// 		},
+// 	};
+
+// 	$.ajax(settings).then((res) => {
+// 		for (let i = 0; i < res.length; i++) {
+// 			if (data == res[i].title) {
+// 				$('[data-form-inputs="bookName"]').attr('value', res[i].title);
+// 				$('[data-form-inputs="authorName"]').attr('value', res[i].author);
+// 				$('[data-form-inputs="bookImageUrl"]').attr('value', res[i].smallImageURL);
+// 				$('[data-form-inputs="publicYear"]').attr('value', res[i].publicationYear);
+// 			}
+// 		}
+// 		$('#searching-results-contanier').addClass('d-none');
+// 	});
+// };
+
+
+
+
+$(document).on('keyup', '#searching-input', (e) => {
+
+	e.preventDefault();
+	let val = $('#searching-input').val().trim().toLowerCase().replace(/[\n\r\s\t]+/g, '');
+	console.log('#searching-input',val);
+	$('#searching-results-contanier').removeClass('d-none');
+	$('lottie-player').addClass('d-none');
+	$('#searching-results').empty();
+	// if (val.length < 4) return toastr.info('The title of the book should not be less than 3 letters');
+
+	const firstLet = val[0];
+	const senterLet = val[Math.floor(val.length / 2)];
+	const lastLet = val[val.length - 1]
+	const um = val.length - 3;
+	const n = Math.floor((um / 2) + 1);
+	const l = um - n;
+	const dot = '.';
+	let final = `${firstLet}${dot.repeat(n)}${senterLet}${dot.repeat(l)}${lastLet}`;
+
+	console.log(final);
+
+	db.ref('/books').on('value', snapshot => {
+		let options = Object.entries(snapshot.val()).map((e) => {
+			for (i in e) {
+				reData = {
+					id: e[0],
+					...e[1],
+				};
+			}
+			return reData;
+		});
+
+		$("#searching-results").append(
+			options.map((opt) => {
+				filterOpt = opt.bookName.replace(/[\n\r\s\t]+/g, '');
+				filter = filterOpt.replace(/[^a-zA-Z0-9 ]/g, '').toLowerCase();
+				if (filter.match(final)) {
+			
+					console.log(opt);
+						// 			res.map((booksInfo) => {
+						// 				console.log(booksInfo);
+						// 				return `
+						            //    <span class='row align-items-center' data-datRes  style='color: #BCBCBC;'>
+						            //        <i class="far fa-clock mb-3 ml-3" aria-hidden="true"></i>
+						            //        <p class='ml-4' style="cursor: pointer" id="${booksInfo.title}">${
+									// 		booksInfo.title.length > 30 ? booksInfo.title.slice(0, 30) + '...' : booksInfo.title
+									// 	}</p>
+						            //    </span>
+					return `
+					<span class='row align-items-center' data-datRes  style='color: #BCBCBC;'>
+					<i class="far fa-clock mb-3 ml-3" aria-hidden="true"></i>
+					<p class='ml-4 idresever' style="cursor: pointer" id="${opt.id}">${opt.bookName}</p>
+					</span>
+					`
+				}
+
 			})
-		);
-	});
-};
 
-setBookData = (data) => {
-	const settings = {
-		async: true,
-		crossDomain: true,
-		url: `https://goodreads-books.p.rapidapi.com/search?q=${data}&page=1`,
-		method: 'GET',
-		headers: {
-			'x-rapidapi-host': 'goodreads-books.p.rapidapi.com',
-			'x-rapidapi-key': '9d9588302emsh58804fa5a30d4d9p1b947ajsn659ea6ae2269',
-		},
-	};
+		)
+	})
+})
 
-	$.ajax(settings).then((res) => {
-		for (let i = 0; i < res.length; i++) {
-			if (data == res[i].title) {
-				$('[data-form-inputs="bookName"]').attr('value', res[i].title);
-				$('[data-form-inputs="authorName"]').attr('value', res[i].author);
-				$('[data-form-inputs="bookImageUrl"]').attr('value', res[i].smallImageURL);
-				$('[data-form-inputs="publicYear"]').attr('value', res[i].publicationYear);
+let booksData = JSON.parse(window.localStorage.getItem('booksData'));
+
+function setBookData(data){
+	
+		for (let i = 0; i < booksData.length; i++) {
+			if (data == booksData[i].id) {
+				$('[data-form-inputs="bookName"]').attr('value', booksData[i].bookName);
+				$('[data-form-inputs="authorName"]').attr('value', booksData[i].authorName);
+				$('[data-form-inputs="bookImageUrl"]').attr('value', booksData[i].bookImageUrl);
+				$('[data-form-inputs="publicYear"]').attr('value', booksData[i].publicYear);
+				document.getElementById("exampleFormControlTextarea1").value = booksData[i].description;
+				$( "#defaultCheck1" ).prop( "checked", booksData[i].isNew === 'new' ? true : false );
 			}
 		}
 		$('#searching-results-contanier').addClass('d-none');
-	});
 };
+
+
+$(document).on('click', '[data-datRes]', (e) => {
+	console.log(e.target.id);
+	setBookData(e.target.id);
+});
+
+console.log(booksData);
+
+
+	let a = 'The Feeling May Remain'
+	if (Object.values(booksData).includes("AdaMaryam")){
+		 console.log('tr');
+	 }else{
+		console.log('vvv');
+	 }
+
+
+
+
 // Add Books
 
 $('#btn-book-from').on('click', (e) => {
 	e.preventDefault();
 	let checked = '';
 	$('#defaultCheck1').is(':checked') ? (checked = 'new') : (checked = 'not');
+	const bookImgUrlStandart = $('[data-form-inputs="bookImageUrl"]').val()
 
 	if ($("[data-form-inputs='catagory'] :selected").val() == 'none')
 		toastr.info('Please select a catagory')
@@ -153,17 +256,46 @@ $('#btn-book-from').on('click', (e) => {
 	) {
 		alert('zehmet olmasa tam doldur');
 	} else {
-		// New Functions
-		let bookImgUrlStandart = $('[data-form-inputs="bookImageUrl"]').val()
-		let filterUrlImg = bookImgUrlStandart.replace(/_...._./,"");
 
-		console.log('--',filterUrlImg);
-		db.ref('/books')
+
+			// db.ref('books').child(`${id}`).update({
+			// 	bookName: $('[data-form-inputs="bookName"]').val(),
+			// 	authorName: $('[data-form-inputs="authorName"]').val(),
+			// 	bookImageUrl: bookImgUrlStandart,
+			// 	publicYear: $('[data-form-inputs="publicYear"]').val(),
+			// 	description: $('[data-form-inputs="description"]').val(),
+			// 	catagory: $("[data-form-inputs='catagory'] :selected").val(),
+			// 	isNew: checked,
+			// })
+
+			
+			// toastr.options = {
+			// 	"closeButton": false,
+			// 	"debug": false,
+			// 	"newestOnTop": false,
+			// 	"progressBar": false,
+			// 	"positionClass": "toast-top-right",
+			// 	"preventDuplicates": false,
+			// 	"onclick": null,
+			// 	"showDuration": "300",
+			// 	"hideDuration": "1000",
+			// 	"timeOut": "5000",
+			// 	"extendedTimeOut": "1000",
+			// 	"showEasing": "swing",
+			// 	"hideEasing": "linear",
+			// 	"showMethod": "fadeIn",
+			// 	"hideMethod": "fadeOut"
+			//  }
+
+			// return  toastr.success('Book update successfully');
+			
+			console.log('er');
+			db.ref('/books')
 			.push()
 			.set({
 				bookName: $('[data-form-inputs="bookName"]').val(),
 				authorName: $('[data-form-inputs="authorName"]').val(),
-				bookImageUrl: filterUrlImg,
+				bookImageUrl: bookImgUrlStandart,
 				publicYear: $('[data-form-inputs="publicYear"]').val(),
 				description: $('[data-form-inputs="description"]').val(),
 				catagory: $("[data-form-inputs='catagory'] :selected").val(),
@@ -171,7 +303,7 @@ $('#btn-book-from').on('click', (e) => {
 				viewCount: 0
 			});
 
-			toastr.options = {
+				toastr.options = {
 				"closeButton": false,
 				"debug": false,
 				"newestOnTop": false,
@@ -196,9 +328,53 @@ $('#btn-book-from').on('click', (e) => {
 				$('[data-form-inputs="bookImageUrl"]').val(null)
 			  },500)
 			  return  toastr.success('Book added successfully');
+		}
+
+
+		// New Functions
+		// let filterUrlImg = bookImgUrlStandart.replace(/_...._./,"");
+
+		// db.ref('/books')
+		// 	.push()
+		// 	.set({
+		// 		bookName: $('[data-form-inputs="bookName"]').val(),
+		// 		authorName: $('[data-form-inputs="authorName"]').val(),
+		// 		bookImageUrl: bookImgUrlStandart,
+		// 		publicYear: $('[data-form-inputs="publicYear"]').val(),
+		// 		description: $('[data-form-inputs="description"]').val(),
+		// 		catagory: $("[data-form-inputs='catagory'] :selected").val(),
+		// 		isNew: checked,
+		// 		viewCount: 0
+		// 	});
+
+		// 	toastr.options = {
+		// 		"closeButton": false,
+		// 		"debug": false,
+		// 		"newestOnTop": false,
+		// 		"progressBar": false,
+		// 		"positionClass": "toast-top-right",
+		// 		"preventDuplicates": false,
+		// 		"onclick": null,
+		// 		"showDuration": "300",
+		// 		"hideDuration": "1000",
+		// 		"timeOut": "5000",
+		// 		"extendedTimeOut": "1000",
+		// 		"showEasing": "swing",
+		// 		"hideEasing": "linear",
+		// 		"showMethod": "fadeIn",
+		// 		"hideMethod": "fadeOut"
+		// 	 }
+		// 	  setTimeout(()=>{
+		// 		$('[data-form-inputs="bookName"]').val(null)
+		// 		$('[data-form-inputs="authorName"]').val(null)
+		// 		$('[data-form-inputs="publicYear"]').val(null)
+		// 		$('[data-form-inputs="description"]').val(null)
+		// 		$('[data-form-inputs="bookImageUrl"]').val(null)
+		// 	  },500)
+		// 	  return  toastr.success('Book added successfully');
 			 
 	}
-});
+);
 
 // ------------------------
 
@@ -210,19 +386,29 @@ $('#dropdown-btn').on('click', (e) => {
 });
 
 function setBookCatagory(inputVal) {
-	db.ref('/bookCatagory').push().set({ inputVal });
+	db.ref('/bookCatagory').push().set({inputVal});
 }
 
 // DB on for book catagory
 							
-
-	let bookCatagory = JSON.parse(window.localStorage.getItem('bookCatagory'));
-	$("[data-form-inputs='catagory']").html(
-		bookCatagory.reverse().map((opt) => {
-			return `<option class='w-100'>${opt.inputVal}</option>`;
-		})
-	);
-
+	db.ref('/bookCatagory').on('value', snapshot => {
+		let options = Object.entries(snapshot.val()).map((e) => {
+			for (i in e) {
+				reData = {
+					id: e[0],
+					...e[1],
+				};
+			}
+			return reData;
+		});
+		
+	
+		$("[data-form-inputs='catagory']").html(
+			options.reverse().map((opt) => {
+				return `<option class='w-100'>${opt.inputVal}</option>`;
+			})
+		);
+	});
 
 // about us js //
 
